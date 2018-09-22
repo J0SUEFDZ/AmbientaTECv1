@@ -1,0 +1,88 @@
+html, body {
+    min-height: 100%;
+    height: 100%;
+}
+/*Toda la pagina*/
+.App{
+    background-color: #232931;
+    min-height: 100%;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Contenido Central*/
+.wrapper{
+    width: 80%;
+    background-color: #F2EFDE;
+    margin: auto;
+    margin-top: 0px;
+}
+
+/*Informacion del Usario*/
+.user-logged{
+    margin: 10px auto;
+    font-size: 1.2vw;
+    display: flex;
+}
+.user-logged img{
+    display: block;
+    max-width: 178px;
+    max-height: 180px;
+    width: auto;
+    height: auto;
+    margin: 5px 15px;
+}
+.user-logged button{
+    background: #232931;
+    color: #fff;
+    margin: 10px;
+    padding: 5px;
+    font-size: 1vw;
+    font-weight: bold;
+    padding: 5px;
+}
+.user-logged button:hover{
+    color: #232931;
+    background: #fff;
+}
+.user-logged p{
+    margin: 10px;
+    padding: 10px;
+}
+
+/*Contenido si se está conectado*/
+.content{
+    color:#fff;
+}
+
+footer{
+    width: 80%;
+    color: #F2EFDE;
+    font-size: 1.5vw;
+    text-align: center;
+    background-color: #393E46;
+    margin: 0px auto;
+    padding: 7px 0 0 0;
+}
+
+.btn-facebook{
+    background: #3b5998;
+    color: #fff;
+    font-size: 1.3vw;
+    font-weight: bold;
+    padding: 15px;
+}
+.btn-twitter{
+    background: #598DCA;
+    color: #fff;
+    font-size: 1.3vw;
+    font-weight: bold;
+    padding: 15px;
+}
+
+
+
+
+
