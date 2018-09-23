@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Empresa Model
-const Empresa = require('../../models/Empresa');
+const Empresa = require('../../models/empresa');
 
 // @route   GET api/empresas
 // @desc    Get All empresas

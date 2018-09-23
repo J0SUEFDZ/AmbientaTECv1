@@ -30,6 +30,10 @@ const SolicitudSchema = new Schema({
   descripcion: {
     type: String,
     required: true
+  },
+  hashtag: {
+    type:String,
+    required: true
   }
 });
 

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Campaña Model
-const Campana = require('../../models/Campana');
+const Campana = require('../../models/campana');
 
 // @route   GET api/campanas
 // @desc    Get All campanas

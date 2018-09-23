@@ -12,13 +12,16 @@ class CampForm extends Component {
 			fecha: '',
 			telefono:'',
 			email:'',
-			descripcion: ''
+			descripcion: '',
+			hashtag:''
 		};
 		this.agregarCampana = this.agregarCampana.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
 	agregarCampana(e){
+		var re = / /gi;
+		this.state.hashtag = "#AmbientaTEC_" + String(this.state.nombre).replace(re,"");		
 		fetch('/api/solicitudes',{
 			method: 'POST',
 			body: JSON.stringify(this.state),
@@ -29,7 +32,7 @@ class CampForm extends Component {
 		})
 		.then(res => res.json())
 		.then (data => {
-			M.toast({html: 'Campaña guardada.'});
+			M.toast({html: 'Campaña guardada'});
 			this.setState({
 				nombre: '',
 				direccion: '',
@@ -38,6 +41,7 @@ class CampForm extends Component {
 				telefono:'',
 				email:'',
 				descripcion: '',
+				hashtag: "",				
 				disabled: false
 			});
 		})

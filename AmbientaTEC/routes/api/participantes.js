@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Campaña Model
-const Participante = require('../../models/Participante');
+const Participante = require('../../models/participante');
 
 // @route   GET api/participantes
 // @desc    Get All participantes
