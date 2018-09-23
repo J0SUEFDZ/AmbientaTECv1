@@ -161,8 +161,8 @@ class App extends Component{
                     </button>
                 </div>         
             	}
-				<img src="https://noticias.utpl.edu.ec/sites/default/files/imagenes_editor/gestion_ambiental-02.jpg" alt="Portada" style= {{width: "100%", position: "relative"}}/>
-				<Navbar id="navver" inverse collapseOnSelect style={{backgroundColor: "#393E46", borderRadius: "0px", position: "-webkit-sticky", position: "sticky", top: "0"}}>
+				<img className="img-portada" src="https://noticias.utpl.edu.ec/sites/default/files/imagenes_editor/gestion_ambiental-02.jpg" alt="Portada" />
+				<Navbar id="navver" inverse collapseOnSelect >
 					<Navbar.Header>
 				    	<Navbar.Brand>
 				      		<a href="#brand">AmbientaTEC</a>
@@ -182,27 +182,27 @@ class App extends Component{
 				</Navbar>
 				{this.state.isLoggedIn?
 					<div className="content">
-						<div style={{width:"48%", borderRadius: "10px", border: "3px dotted #333333", margin: "0% 1%", padding: "1%", display:"inline-block"}}>
-							<a><img style={{width:"4.5%", display:"inline-block"}} src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
-							<p style={{fontSize:"1.2em", textAlign:"center", color: "#417B64", display:"inline-block",width:"90%", fontStyle:"bold"}}>Consejo del Día</p>
-							<a><img style={{width:"4.5%", display:"inline-block"}} src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
-							<img src={this.state.picture} alt="Info" style={{width:"80%", display:"block", margin: "10px auto"}}/>
+						<div className="element-wrapper">
+							<a><img className="element-icon" src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
+							<p className="element-title">Consejo del Día</p>
+							<a><img className="element-icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
+							<img className="element-img" src={this.state.picture} alt="Info"/>
 							<p>Este es {this.state.name}, cuyo correo es {this.state.email}</p>
 						</div>
-						<div style={{width:"48%", borderRadius: "10px", border: "3px dotted #333333", margin: "0% 1%", padding: "1%", display:"inline-block"}}>
-							<a><img style={{width:"4.5%", display:"inline-block"}} src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
-							<p style={{fontSize:"1.2em", textAlign:"center", color: "#417B64", display:"inline-block",width:"90%", fontStyle:"bold"}}>Recomendaciones</p>
-							<a><img style={{width:"4.5%", display:"inline-block"}} src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
-							<img src={this.state.picture} alt="Info" style={{width:"80%",width:"80%", display:"block", margin: "10px auto"}}/>
+						<div className="element-wrapper">
+							<a><img className="element-icon" src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
+							<p className="element-title">Recomendaciones</p>
+							<a><img className="element-icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
+							<img className="element-img" src={this.state.picture} alt="Info"/>
 							<p>Este es {this.state.name}, cuyo correo es {this.state.email}</p>
 						</div>
-						<div className= "title" style={{width: "100%", padding:"20px", color: "#F2EFDE", textAlign:"center", backgroundColor: "#393E46", margin:"10px 0px", float:"clear"}}>
-							<a href="#navver"><img style={{width:"3%", display:"inline-block", float:"left"}}src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Home"/></a>
-							<h3 id="hashtag" style={{color: "#F2EFDE", margin:"0px"}}>Generar Hashtag</h3>
+						<div className= "title-separator">
+							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Hashtag"/></a>
+							<h3 id="hashtag">Generar Hashtag</h3>
 						</div>
-						<div className= "title" style={{width: "100%", padding:"20px", color: "#F2EFDE", textAlign:"center", backgroundColor: "#393E46", margin:"10px 0px"}}>
-							<a href="#navver"><img style={{width:"3%", display:"inline-block", float:"left"}}src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Home"/></a>
-							<h3 id="campanha" style={{color: "#F2EFDE", margin:"0px"}}>Campañas</h3>
+						<div className= "title-separator">
+							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Campañas"/></a>
+							<h3 id="campanha">Campañas</h3>
 						</div>
 						<h5>Si desea enviar una solicitud para organizar una campaña presione el siguiente boton.</h5>
 						<Button bsStyle="success" bsSize="large" onClick={this.handleShow}>
@@ -225,9 +225,9 @@ class App extends Component{
 						<Campaign/>
 					</div>
 				:
-					<div style={{textAlign:"center", display:"block"}}>
-						<h1 style={{color: "#417B64", fontStyle:"bold"}}>Parece que todavía no estás conectado :(</h1>
-						<p>Para acceder a este contenido deberás conectarte con alguna de tus redes sociaes, Facebook o Twitter.</p>
+					<div className="not-connected">
+						<p className="title-not-connected" >Parece que todavía no estás conectado :(</p>
+						<p className="not-connected-text">Para acceder a este contenido deberás conectarte con alguna de tus redes sociaes, Facebook o Twitter.</p>
 					</div>
 				}
 				</div>

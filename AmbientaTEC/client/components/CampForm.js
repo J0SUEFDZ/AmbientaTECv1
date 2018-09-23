@@ -29,7 +29,7 @@ class CampForm extends Component {
 		})
 		.then(res => res.json())
 		.then (data => {
-			//M.toast({html: 'Campaña guardada.'});
+			M.toast({html: 'Campaña guardada.'});
 			this.setState({
 				nombre: '',
 				direccion: '',
