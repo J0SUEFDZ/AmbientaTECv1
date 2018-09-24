@@ -215,7 +215,7 @@ class App extends Component{
 									<Modal.Title>Solicitar campaña</Modal.Title>
 								</Modal.Header>
 								<Modal.Body>
-									<CampForm/>
+									<CampForm usuario={this.state}/>
 								</Modal.Body>
 								<Modal.Footer>
 									<Button onClick={this.handleClose}>Close</Button>

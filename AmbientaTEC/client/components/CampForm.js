@@ -17,11 +17,10 @@ class CampForm extends Component {
 		};
 		this.agregarCampana = this.agregarCampana.bind(this);
 		this.handleChange = this.handleChange.bind(this);
-		this.onHandleSubmit = this.onHandleSubmit.bind(this);
 	}
 
 	agregarCampana(e){
-		console.log(this.state.direccion);
+
 		fetch('/api/campanas',{
 			method: 'POST',
 			body: JSON.stringify(this.state),
@@ -47,6 +46,14 @@ class CampForm extends Component {
 		e.preventDefault();
 	}
 
+	componentDidMount() {
+		const usuario=this.props.usuario;
+		this.setState({
+			organizador: usuario.name,
+			email: usuario.email
+		})
+	}
+
 
 	handleChange(e){
 		const {name, value} = e.target;
@@ -55,24 +62,10 @@ class CampForm extends Component {
 		});
 	}
 
-	onHandleSubmit(e) {
-	    e.preventDefault();
-	    
-		this.setState({
-			nombre: '',
-			direccion: '',
-			organizador: '',
-			fecha: '',
-			telefono:'',
-			email:'',
-			descripcion: '',
-			habilitada: false
-		});
-  }
-
 
   render() {
-  	const {nombre, direccion, organizador, fecha, telefono, email, descripcion, habilitada} = this.state;
+  	const {nombre, direccion, fecha, telefono, descripcion, habilitada} = this.state;
+
     return (
       <form className= "form-campanas" 
       		onSubmit={this.agregarCampana}>
@@ -93,15 +86,7 @@ class CampForm extends Component {
             	name="direccion"
             	value={direccion}
             	onChange = {this.handleChange}/>
-            <ControlLabel>Organizador</ControlLabel>
-            <FormControl
-            	type="text"
-            	placeholder="Nombre del organizador"
-            	className="form-control"
-            	name="organizador"
-            	value={organizador}
-            	onChange = {this.handleChange}/>
-            <ControlLabel>Fecha</ControlLabel>
+            <ControlLabel>Seleccione la fecha</ControlLabel>
             <FormControl
             	type="date"
             	placeholder=""
@@ -117,15 +102,7 @@ class CampForm extends Component {
             	name="telefono"
             	value={telefono}
             	onChange = {this.handleChange}/>
-            <ControlLabel>E-mail</ControlLabel>
-            <FormControl
-            	type="text"
-            	placeholder="will100@gmail.com"
-            	className="form-control"
-            	name="email"
-            	value={email}
-            	onChange = {this.handleChange}/>
-            <ControlLabel>Descripcion</ControlLabel>
+            <ControlLabel>Descripción</ControlLabel>
             <FormControl
             	type="text"
             	placeholder="Detalles"
