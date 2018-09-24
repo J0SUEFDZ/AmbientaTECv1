@@ -12,9 +12,8 @@ class Campaign extends Component{
 			telefono:'',
 			email:'',
 			descripcion: '',
-			campanas: [],
-			disabled: false,
-			mFlag: false
+			campanas:[],
+			habilitada: false
 		};
 		this.participar = this.participar.bind(this);
 	}

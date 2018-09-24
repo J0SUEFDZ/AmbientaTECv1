@@ -30,6 +30,10 @@ const CampanaSchema = new Schema({
   descripcion: {
     type: String,
     required: true
+  },
+  habilitada: {
+    type: Boolean,
+    required: true
   }
 });
 

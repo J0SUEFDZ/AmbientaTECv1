@@ -13,7 +13,8 @@ class CampForm extends Component {
 			telefono:'',
 			email:'',
 			descripcion: '',
-			hashtag:''
+			hashtag:'',
+			habilitada: false
 		};
 		this.agregarCampana = this.agregarCampana.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -22,7 +23,7 @@ class CampForm extends Component {
 	agregarCampana(e){
 		var re = / /gi;
 		this.state.hashtag = "#AmbientaTEC_" + String(this.state.nombre).replace(re,"");		
-		fetch('/api/solicitudes',{
+		fetch('/api/campanas',{
 			method: 'POST',
 			body: JSON.stringify(this.state),
 	        headers: {
@@ -32,7 +33,6 @@ class CampForm extends Component {
 		})
 		.then(res => res.json())
 		.then (data => {
-			M.toast({html: 'Campaña guardada'});
 			this.setState({
 				nombre: '',
 				direccion: '',
@@ -42,12 +42,19 @@ class CampForm extends Component {
 				email:'',
 				descripcion: '',
 				hashtag: "",				
-				disabled: false
+				habilitada: false
 			});
 		})
 		.catch(err => console.error(err));
 		e.preventDefault();
+	}
 
+	componentDidMount() {
+		const usuario=this.props.usuario;
+		this.setState({
+			organizador: usuario.name,
+			email: usuario.email
+		})
 	}
 
 
@@ -60,49 +67,55 @@ class CampForm extends Component {
 
 
   render() {
+  	const {nombre, direccion, fecha, telefono, descripcion, habilitada} = this.state;
+
     return (
-      <form onSubmit={this.agregarCampana}>
-      
+      <form className= "form-campanas" 
+      		onSubmit={this.agregarCampana}>
         <FormGroup role="form">
         	<ControlLabel>Nombre de campaña</ControlLabel>
           	<FormControl
             	type="text"
             	placeholder="Digite el nombre"
             	className="form-control"
-            	onChange = {(event) => this.setState({nombre: event.target.value })}/>
+            	name="nombre"
+            	value={nombre}
+            	onChange = {this.handleChange}/>
             <ControlLabel>Direccion</ControlLabel>
             <FormControl
             	type="text"
             	placeholder="Digite la direccion"
-            	onChange = {(event) => this.setState({direccion: event.target.value })}/>
-            <ControlLabel>Organizador</ControlLabel>
-            <FormControl
-            	type="text"
-            	placeholder="Nombre del organizador"
-            	onChange = {(event) => this.setState({organizador: event.target.value })}/>
-            <ControlLabel>Fecha</ControlLabel>
+            	className="form-control"
+            	name="direccion"
+            	value={direccion}
+            	onChange = {this.handleChange}/>
+            <ControlLabel>Seleccione la fecha</ControlLabel>
             <FormControl
             	type="date"
             	placeholder=""
-            	onChange = {(event) => this.setState({fecha: event.target.value })}/>
+            	name="fecha"
+            	className="form-control"
+            	value={fecha}
+            	onChange = {this.handleChange}/>
             <ControlLabel>Telefono</ControlLabel>
             <FormControl
             	type="number"
             	placeholder="Celular"
-            	onChange = {(event) => this.setState({telefono: event.target.value })}/>
-            <ControlLabel>E-mail</ControlLabel>
-            <FormControl
-            	type="text"
-            	placeholder="will100@gmail.com"
-            	onChange = {(event) => this.setState({email: event.target.value })}/>
-            <ControlLabel>Descripcion</ControlLabel>
+            	className="form-control"
+            	name="telefono"
+            	value={telefono}
+            	onChange = {this.handleChange}/>
+            <ControlLabel>Descripción</ControlLabel>
             <FormControl
             	type="text"
             	placeholder="Detalles"
-            	onChange = {(event) => this.setState({descripcion: event.target.value })}/>
+            	className="form-control"
+            	name="descripcion"
+            	value={descripcion}
+            	onChange = {this.handleChange}/>
           	<FormControl.Feedback />
         </FormGroup>
-		<button type="submit" className="btn light-blue darken-4">
+		<button  type="submit" className="btn light-blue darken-4">
 			Enviar
 		</button>
       </form>
