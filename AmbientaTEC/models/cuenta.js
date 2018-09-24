@@ -18,6 +18,14 @@ const CuentaSchema = new Schema({
   email: {
     type: String,
     required: true
+  },
+  retosGanados:{
+    type: Array,
+    required: false
+  },
+  retosPerdidos:{
+    type: Array,
+    required:false
   }
 });
 

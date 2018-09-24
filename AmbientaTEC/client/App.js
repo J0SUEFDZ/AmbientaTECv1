@@ -15,7 +15,6 @@ class App extends Component{
 	
 	constructor(props, context) {
 		super(props, context);
-
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
 		this.loginTwitter = this.loginTwitter.bind(this); // <-- add this line
@@ -232,7 +231,7 @@ class App extends Component{
 						</div>	 
 						       	
 						<h5>Puede participar en cualquiera de los siguientes retos.</h5>			    
-						<Challenge/>
+						<Challenge usuario={this.state}/>
 
 					</div>
 				:
