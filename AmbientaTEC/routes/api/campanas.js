@@ -8,9 +8,8 @@ const Campana = require('../../models/Campana');
 // @desc    Get All campanas
 // @access  Public
 router.get('/', async (req, res) => {
-	const campanas = await Campana.find();
+	const campanas = await Campana.find({'habilitada': true});
     //.sort({ date: -1 })
-    console.log(campanas);
     res.json(campanas);
 });
 
@@ -25,7 +24,8 @@ router.post('/', (req, res) => {
 		fecha: req.body.fecha,
 		telefono: req.body.telefono,
 		email: req.body.email,
-		descripcion: req.body.descripcion
+		descripcion: req.body.descripcion,
+		habilitada: req.body.habilitada
 	});
 
 	newCampana.save().then(campana => res.json(campana));

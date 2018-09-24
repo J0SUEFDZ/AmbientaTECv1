@@ -207,7 +207,8 @@ class App extends Component{
 						<h5>Si desea enviar una solicitud para organizar una campaña presione el siguiente boton.</h5>
 						<Button bsStyle="success" bsSize="large" onClick={this.handleShow}>
 							Enviar solicitud
-						</Button>		        	
+						</Button>		 
+						       	
 						<div className= "container">
 							<Modal show={this.state.show} onHide={this.handleClose}>
 								<Modal.Header closeButton>
