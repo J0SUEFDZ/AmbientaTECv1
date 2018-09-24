@@ -20,7 +20,6 @@ class CampForm extends Component {
 	}
 
 	agregarCampana(e){
-
 		fetch('/api/campanas',{
 			method: 'POST',
 			body: JSON.stringify(this.state),
@@ -65,7 +64,6 @@ class CampForm extends Component {
 
   render() {
   	const {nombre, direccion, fecha, telefono, descripcion, habilitada} = this.state;
-
     return (
       <form className= "form-campanas" 
       		onSubmit={this.agregarCampana}>

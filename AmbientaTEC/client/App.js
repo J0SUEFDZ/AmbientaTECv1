@@ -6,6 +6,7 @@ import  '../style/style.css';
 
 //SubComponents
 import CampForm from './components/CampForm';
+import Challenge from './components/Challenge';
 import Campaign from './components/Campaign';
 import SocialLogin from './components/SocialLogin';
 // Esto es JSX: Consiste en javascript con html
@@ -224,6 +225,15 @@ class App extends Component{
 						</div>
 						<h5>Puede participar en cualquiera de las siguientes campañas, solo marquela con un check.</h5>			    
 						<Campaign/>
+
+						<div className= "title-separator">
+							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Retos"/></a>
+							<h3 id="reto">Challenges</h3>
+						</div>	 
+						       	
+						<h5>Puede participar en cualquiera de los siguientes retos.</h5>			    
+						<Challenge/>
+
 					</div>
 				:
 					<div className="not-connected">
