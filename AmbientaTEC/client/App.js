@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Navigation from './components/Navigation';
-import {Modal, Button, Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Carousel, Modal, Button, Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { auth, providerTwitter, providerFacebook } from '../firebase.js';
 import  '../style/style.css';
 
@@ -9,6 +9,7 @@ import CampForm from './components/CampForm';
 import Challenge from './components/Challenge';
 import Campaign from './components/Campaign';
 import SocialLogin from './components/SocialLogin';
+
 // Esto es JSX: Consiste en javascript con html
 //Se necesita el traductor Babel
 class App extends Component{
@@ -22,7 +23,7 @@ class App extends Component{
 		this.logout = this.logout.bind(this); // <-- add this line
 		this.insert = this.insert.bind(this);
 		this.userExist = this.userExist.bind(this);
-
+		this.escogerTip = this.escogerTip.bind(this);
 		this.state = {
 				_id: "",
 				show: false,
@@ -32,8 +33,12 @@ class App extends Component{
 				name: "",
 				email: "",
 				picture: "",
+				contador: 0,
 				retosParticipacion: [],
-				retosGanados: []
+				retosGanados: [],
+				tips:[],
+				recomendaciones:[],
+				tipActual:[]
 		};
   	}
 
@@ -44,7 +49,24 @@ class App extends Component{
   	handleShow() {
     	this.setState({ show: true });
 	}
+
+	fetchTips() {
+	    fetch('/api/tips')
+	      .then(res => res.json())
+	      .then(data => {
+	        this.setState({tips: data});
+	        
+	      });
+	}
 	
+	fetchRecomendaciones() {
+	    fetch('/api/recomendaciones')
+	      .then(res => res.json())
+	      .then(data => {
+	        this.setState({recomendaciones: data});
+	        
+	      });
+	}
 	userExist(user, register){
 		fetch(`/api/cuentas/${user.uid}`, {
 				method: 'GET',
@@ -63,7 +85,8 @@ class App extends Component{
 								name: data.name,
 								email: data.email,
 								picture: user.photoURL,
-								retosParticipacion: data.retosParticipacion
+								retosParticipacion: data.retosParticipacion,
+								contador:0
 						}); 
 
 
@@ -77,7 +100,8 @@ class App extends Component{
 								name: user.displayName,
 								email: user.email,
 								retosParticipacion: [],
-								retosGanados:[]
+								retosGanados:[],
+								contador:0
 						});
 						fetch('/api/cuentas', {
 								method: 'POST',
@@ -96,7 +120,8 @@ class App extends Component{
 								email: user.email,
 								picture: user.photoURL,
 								retosParticipacion: [],
-								retosGanados:[]
+								retosGanados:[],
+								contador:0
 						}); 
 						return false;
 				}
@@ -121,6 +146,8 @@ class App extends Component{
 							this.setState({ isLoggedIn: false });
 					}
 			});
+			this.fetchTips();
+			this.fetchRecomendaciones();
 	}
 
 	logout() {
@@ -151,7 +178,61 @@ class App extends Component{
 			});
 	}
 
+	escogerTip(){
+    	if(this.state.contador <= this.state.tips.length()){
+    		this.setState({
+				contador: this.state.contador +1,
+				tipActual: this.state.tips.map((tip, i) =>{
+					console.log(this.state.tips.length)
+					if (i === this.state.contador){
+						console.log("Dentro IFFF");
+						return (
+							<div key={tip._id} style={{width: "80%"}} >	
+								<p>{tip.nombre}</p>
+								<img className="element-img" src={tip.foto} alt="Info"/>
+								<p>{tip.descripcion}</p>
+
+							</div>
+						)
+					}
+				})
+			});
+    	}else{
+    		this.setState({
+    			contador: 0
+    		})
+    	}
+		
+
+		
+	}
+
 	render() {
+		const tips = this.state.tips.map((tip, i) =>{
+
+			return (
+		  		<Carousel.Item key={tip._id}>
+		    		<img width={900} height={500} alt="900x500" src={tip.foto} />
+		    		<Carousel.Caption>
+		      			<h3>{tip.nombre}</h3>
+		      			<p>{tip.descripcion}</p>
+		    		</Carousel.Caption>
+		  		</Carousel.Item>				
+			)
+		});
+
+		const recomendaciones = this.state.recomendaciones.map((tip, i) =>{
+			return (
+		  		<Carousel.Item key={tip._id}>
+		    		<img width={900} height={500} alt="900x500" src={tip.foto} />
+		    		<Carousel.Caption>
+		      			<h3>{tip.nombre}</h3>
+		      			<p>{tip.descripcion}</p>
+		    		</Carousel.Caption>
+		  		</Carousel.Item>				
+			)
+		});
+
 		return(
 			<div className ="App">
 				<div className="wrapper">
@@ -198,15 +279,18 @@ class App extends Component{
 							<a><img className="element-icon" src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
 							<p className="element-title">Consejo del Día</p>
 							<a><img className="element-icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
-							<img className="element-img" src={this.state.picture} alt="Info"/>
-							<p>Este es {this.state._id}, cuyo correo es {this.state.email}</p>
+							<Carousel key="1">
+								{tips}
+							</Carousel>
 						</div>
+
 						<div className="element-wrapper">
 							<a><img className="element-icon" src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
 							<p className="element-title">Recomendaciones</p>
 							<a><img className="element-icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
-							<img className="element-img" src={this.state.picture} alt="Info"/>
-							<p>Este es {this.state.userID}, cuyo correo es {this.state.email}</p>
+							<Carousel key="2">
+								{recomendaciones}
+							</Carousel>
 						</div>
 						<div className= "title-separator">
 							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Hashtag"/></a>

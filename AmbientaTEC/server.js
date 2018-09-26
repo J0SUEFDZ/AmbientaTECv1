@@ -9,6 +9,8 @@ const participantes = require('./routes/api/participantes');
 const cuentas = require('./routes/api/cuentas');
 const solicitudes = require('./routes/api/solicitudes');
 const challenges = require('./routes/api/challenges');
+const tips = require('./routes/api/tips');
+const recomendaciones = require('./routes/api/recomendaciones');
 
 const app = express();
 
@@ -31,6 +33,8 @@ app.use('/api/participantes', participantes);
 app.use('/api/cuentas', cuentas);
 app.use('/api/solicitudes', solicitudes);
 app.use('/api/challenges', challenges);
+app.use('/api/tips', tips);
+app.use('/api/recomendaciones', recomendaciones);
 
 //Static files
 
