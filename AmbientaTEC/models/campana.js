@@ -34,6 +34,10 @@ const CampanaSchema = new Schema({
   habilitada: {
     type: Boolean,
     required: true
+  },
+  hashtag: {
+    type: String,
+    required: true
   }
 });
 

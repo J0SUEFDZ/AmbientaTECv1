@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Navigation from './components/Navigation';
 import {Carousel, Modal, Button, Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { auth, providerTwitter, providerFacebook } from '../firebase.js';
+import { HelpBlock, FormControl, ControlLabel, FormGroup} from 'react-bootstrap';
 import  '../style/style.css';
 
 //SubComponents
@@ -24,6 +25,8 @@ class App extends Component{
 		this.insert = this.insert.bind(this);
 		this.userExist = this.userExist.bind(this);
 		this.escogerTip = this.escogerTip.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+
 		this.state = {
 				_id: "",
 				show: false,
@@ -38,13 +41,22 @@ class App extends Component{
 				retosGanados: [],
 				tips:[],
 				recomendaciones:[],
-				tipActual:[]
+				tipActual:[],
+				Hashtag1: 'fun',
+				Hashtag2: 'trash'
 		};
   	}
 
   	handleClose() {
     	this.setState({ show: false });
-  	}
+	  }
+	  
+	handleChange(e){
+		const {name, value} = e.target;
+		this.setState({
+			[name]: value
+		});
+	}
 
   	handleShow() {
     	this.setState({ show: true });
@@ -93,7 +105,6 @@ class App extends Component{
 					return true;
 				}
 				if(register && !data){
-						console.log("LLLLL");
 						const user_data = ({
 								provider: user.providerId,
 								userID: user.uid,
@@ -132,7 +143,7 @@ class App extends Component{
 		.catch(err => console.error(err))
 
 }
-
+	
 	componentDidMount() {
 			auth.onAuthStateChanged((user) => {
 					if (user) {
@@ -234,7 +245,7 @@ class App extends Component{
 		});
 
 		return(
-			<div className ="App">
+			<div className ="App" id="App">
 				<div className="wrapper">
             	{this.state.isLoggedIn ?
                 <div className="user-logged">	
@@ -270,6 +281,9 @@ class App extends Component{
 					      		<NavItem eventKey={2} href="#campanha">
 					        		Campañas
 					      		</NavItem>
+								<NavItem eventKey={2} href="#reto">
+					        		Challenges
+					      		</NavItem>
 					    	</Nav>
 				  		</Navbar.Collapse>
 				</Navbar>
@@ -293,11 +307,32 @@ class App extends Component{
 							</Carousel>
 						</div>
 						<div className= "title-separator">
-							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Hashtag"/></a>
+							<a href="#App"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Hashtag"/></a>
 							<h3 id="hashtag">Generar Hashtag</h3>
 						</div>
+						<form className= "form-campanas">
+							<FormGroup role="form">
+								<ControlLabel>Hashtag</ControlLabel>
+								<br/>
+								<label className="label1">#More</label>
+								<FormControl className="selects" componentClass="select" placeholder="green" name="Hashtag1" onChange={this.handleChange}>
+									<option value="fun">fun</option>
+									<option value="life">life</option>
+									<option value="time">time</option>
+								</FormControl>
+								<label className="label2">Less</label>
+								<FormControl className="selects" componentClass="select" placeholder="trash" name="Hashtag2"onChange={this.handleChange}>
+									<option value="trash">trash</option>
+									<option value="plastic">plastic</option>
+									<option value="paper">paper</option>
+									<option value="cans">cans</option>
+								</FormControl>
+								
+						<a href={"https://twitter.com/intent/tweet?button_hashtag=AmbientaTEC_more_"+this.state.Hashtag1+"_less_"+this.state.Hashtag2+"&ref_src=twsrc%5Etfw"} className="twitter-hashtag-button" data-show-count="false"><img src="http://static.sites.yp.com/var/m_6/6b/6bd/11192116/1470938-twitter.png?v=6.5.1.37806" alt="Twitter"/>Tweet #AmbientaTEC_more_{this.state.Hashtag1}_less_{this.state.Hashtag2}</a>
+						<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><FormControl.Feedback />
+							</FormGroup></form>
 						<div className= "title-separator">
-							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Campañas"/></a>
+							<a href="#App"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Campañas"/></a>
 							<h3 id="campanha">Campañas</h3>
 						</div>
 						<h5>Si desea enviar una solicitud para organizar una campaña presione el siguiente boton.</h5>
@@ -322,7 +357,7 @@ class App extends Component{
 						<Campaign/>
 
 						<div className= "title-separator">
-							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Retos"/></a>
+							<a href="#App"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Retos"/></a>
 							<h3 id="reto">Challenges</h3>
 						</div>	 
 						       	

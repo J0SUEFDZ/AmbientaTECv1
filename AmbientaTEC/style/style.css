@@ -139,6 +139,42 @@ body {
     color:  #393E46;
 }
 
+.label1{
+    color: #417B64;
+    font-style: bold;
+    display: inline-block;
+}
+
+.label2{
+    color: rgb(161, 17, 72); 
+    display: inline-block;
+}
+.selects{
+    width: fit-content;
+    display: inline-block;
+}
+
+.twitter-hashtag-button {
+    background: #1DA3F4;
+    color: #fff;
+    font-size: 1.5vw;
+    font-weight: bold;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    width: fit-content;
+    display: inline-block;
+}
+
+.twitter-hashtag-button:hover {
+    background: #fff;
+    color: #1DA3F4;
+}
+.form-campanas{
+    margin: 20px auto;
+    width: 90%;
+}
+
 footer{
     width: 80%;
     color: #F2EFDE;
