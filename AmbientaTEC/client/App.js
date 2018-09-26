@@ -32,7 +32,8 @@ class App extends Component{
 				name: "",
 				email: "",
 				picture: "",
-				retosParticipacion: []
+				retosParticipacion: [],
+				retosGanados: []
 		};
   	}
 
@@ -54,8 +55,6 @@ class App extends Component{
 		})	.then(res => res.json())
 			.then(data => 
 				{   if(data && !register){
-						console.log("aQQ");
-						console.log(data.retosParticipacion);
 						this.setState({
 								_id: data._id,
 								isLoggedIn: true,
@@ -67,6 +66,7 @@ class App extends Component{
 								retosParticipacion: data.retosParticipacion
 						}); 
 
+
 					return true;
 				}
 				if(register && !data){
@@ -75,7 +75,9 @@ class App extends Component{
 								provider: user.providerId,
 								userID: user.uid,
 								name: user.displayName,
-								email: user.email
+								email: user.email,
+								retosParticipacion: [],
+								retosGanados:[]
 						});
 						fetch('/api/cuentas', {
 								method: 'POST',
@@ -92,7 +94,9 @@ class App extends Component{
 								userID: user.uid,
 								name: user.displayName,
 								email: user.email,
-								picture: user.photoURL
+								picture: user.photoURL,
+								retosParticipacion: [],
+								retosGanados:[]
 						}); 
 						return false;
 				}
@@ -239,7 +243,7 @@ class App extends Component{
 						</div>	 
 						       	
 						<h5>Puede participar en cualquiera de los siguientes retos.</h5>			    
-						<Challenge usuario={this.state}/>
+						<Challenge usuario={this.state} />
 
 					</div>
 				:

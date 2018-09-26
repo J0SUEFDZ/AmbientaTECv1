@@ -16,14 +16,14 @@ class ChallengeModel extends Component{
 		};
 		this.handleShow = this.handleShow.bind(this);
 		this.participarReto = this.participarReto.bind(this);
-		
+		this.removeChallenge = this.removeChallenge.bind(this);
 	}
 
 	componentDidMount() {
 		const newReto=this.props.newReto;
-		const usuario = this.props.user;
+		const user = this.props.user;
 		this.setState({
-			userId: usuario,
+			userId: user,
 			_id: newReto._id,
 			challengeName: newReto.challengeName,
 			points: newReto.points,
@@ -40,33 +40,71 @@ class ChallengeModel extends Component{
 		}, this.state.time);
 	}
 
-	participarReto(){
-			fetch(`/api/cuentas/${this.state.userId}`, {
-				method: 'PUT',
-						body: JSON.stringify({
-							idReto: this.state._id
-						}),
-		        headers: {
-		          'Accept': 'application/json',
-		          'Content-Type': 'application/json'
-		        }
-			})
-			.then(res => res.json())
-			.then (data => {
-				console.log(data.id)
-			})
-			.catch(err => console.error(err));
+	//Para terminar
+	fetchChallenges() {
+	    fetch('/api/challenges')
+	      .then(res => res.json())
+	      .then(data => {
+	      	const lista = data;
+	      	const lista1 = this.state.retosParticipacion
+	      	for (var entry of data) {
+	      		console.log("En la ");
+	      		for (var entry1 of lista1) {
+					if (entry._id === entry1){
+						console.log("En la ostia");
+						var index = lista.indexOf(entry);
+						console.log(index);
+						if(index >= 0){
+							console.log("IF if");
+							lista.splice(index, 1);
+						}
+					}
+				}
+				
+			}
+			this.setState({challenges: lista});
+	        //this.setState({challenges: data});
+	        //console.log(this.state.challenges);
+	      });
+	}
 
+	participarReto(){
+		fetch(`/api/cuentas/${this.state.userId}`, {
+			method: 'PUT',
+					body: JSON.stringify({
+						idReto: this.state._id
+					}),
+	        headers: {
+	          'Accept': 'application/json',
+	          'Content-Type': 'application/json'
+	        }
+		})
+		.then(res => res.json())
+		.then (data => {
+			console.log(data)
+		})
+		.catch(err => console.error(err));
+		this.setState({show: true});
+		//this.removeChallenge(this.state.reto);
+	}
+
+	removeChallenge(reto) {
+		var array = this.state.retos; 
+  		var index = array.indexOf(reto)
+  		console.log(index)
+  		array.splice(reto, 1);
+  		this.setState({retos: array});
+		console.log(this.state.retos)
 	}
 
 	render() {
-		
+		const submitDisabled = this.state.show;
 		return (
 			<div key={this.state._id} style={{width: "80%"}} >
 		      	<form>
 		      		<p>      
 		      			<label>
-		      			    <Button bsStyle="primary" bsSize="large" onClick={this.participarReto}>
+		      			    <Button bsStyle="primary" bsSize="large" disabled={submitDisabled} onClick={this.participarReto}>
 								Participar
 							</Button>
 			            </label>
