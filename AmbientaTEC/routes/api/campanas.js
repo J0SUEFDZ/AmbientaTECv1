@@ -25,7 +25,8 @@ router.post('/', (req, res) => {
 		telefono: req.body.telefono,
 		email: req.body.email,
 		descripcion: req.body.descripcion,
-		habilitada: req.body.habilitada
+		habilitada: req.body.habilitada,
+		hashtag: req.body.hashtag
 	});
 
 	newCampana.save().then(campana => res.json(campana));

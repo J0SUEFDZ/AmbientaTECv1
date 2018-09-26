@@ -13,13 +13,23 @@ class CampForm extends Component {
 			telefono:'',
 			email:'',
 			descripcion: '',
-			habilitada: false
+			habilitada: false,
+			Hashtag1: 'fun',
+			Hashtag2: 'trash',
+			hashtag: ''
 		};
 		this.agregarCampana = this.agregarCampana.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 	}
 
 	agregarCampana(e){
+		const Hashtag22="#AmbientaTEC_more_"+this.state.Hashtag1+"_less_"+this.state.Hashtag2;
+		this.setState({
+			Hashtag1: null,
+			Hashtag2: null,
+			hashtag: Hashtag22
+		})
+
 		fetch('/api/campanas',{
 			method: 'POST',
 			body: JSON.stringify(this.state),
@@ -38,7 +48,10 @@ class CampForm extends Component {
 				telefono:'',
 				email:'',
 				descripcion: '',
-				habilitada: false
+				habilitada: false,
+				Hashtag1: 'fun',
+				Hashtag2: 'trash',
+				hashtag: ''
 			});
 		})
 		.catch(err => console.error(err));
@@ -53,7 +66,6 @@ class CampForm extends Component {
 		})
 	}
 
-
 	handleChange(e){
 		const {name, value} = e.target;
 		this.setState({
@@ -63,7 +75,7 @@ class CampForm extends Component {
 
 
   render() {
-  	const {nombre, direccion, fecha, telefono, descripcion, habilitada} = this.state;
+  	const {nombre, direccion, fecha, telefono, descripcion, habilitada, Hashtag1, Hashtag2, hashtag} = this.state;
     return (
       <form className= "form-campanas" 
       		onSubmit={this.agregarCampana}>
@@ -108,12 +120,28 @@ class CampForm extends Component {
             	name="descripcion"
             	value={descripcion}
             	onChange = {this.handleChange}/>
+			<ControlLabel>Hashtag</ControlLabel>
+				<br/>
+				<FormControl.Static className="label1">#More</FormControl.Static>
+				<FormControl className="selects" componentClass="select" placeholder="green" name="Hashtag1" onChange={this.handleChange}>
+					<option value="fun">fun</option>
+					<option value="life">life</option>
+					<option value="time">time</option>
+				</FormControl>
+				<FormControl.Static className="label2">Less</FormControl.Static>
+				<FormControl className="selects" componentClass="select" placeholder="trash" name="Hashtag2"onChange={this.handleChange}>
+					<option value="trash">trash</option>
+					<option value="plastic">plastic</option>
+					<option value="paper">paper</option>
+					<option value="cans">cans</option>
+			</FormControl>
           	<FormControl.Feedback />
         </FormGroup>
 		<button  type="submit" className="btn light-blue darken-4">
 			Enviar
 		</button>
       </form>
+	  
     );
   }
 
