@@ -19,6 +19,10 @@ const CuentaSchema = new Schema({
     type: String,
     required: true
   },
+  retosParticipacion:{
+    type: Array,
+    required: false
+  },
   retosGanados:{
     type: Array,
     required: false

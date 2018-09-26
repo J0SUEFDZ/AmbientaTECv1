@@ -14,19 +14,28 @@ class Challenge extends Component{
 			time: 0,
 			description: '',
 			challenges:[],
-			show: false
+			show: false,
+			retosParticipacion: []
 		};
+		this.areDifferentByIds = this.areDifferentByIds.bind(this);
 	}
 	componentDidMount() {
 		const usuario=this.props.usuario;
-
-		console.log("abajo");
 		this.setState({
-			userId: usuario.name
-		})
-		console.log(this.state.userId);
+			userId: usuario._id,
+			retosParticipacion: usuario.retosParticipacion
+		});
+
 	    this.fetchChallenges();
 
+	}
+
+	areDifferentByIds(a, b) {
+		console.log(a);
+		console.log(b);
+	    var idsA = a.map( (x) => { return x._id; } ).sort();
+	    var idsB = b.map( (x) => { return x; } ).sort();
+	    return (idsA.join(',') === idsB.join(',') );
 	}
 
 	fetchChallenges() {
@@ -38,8 +47,17 @@ class Challenge extends Component{
 	      });
 	}
 
+	removeChallenge() {
+		const retosP = this.state.retosParticipacion.map((retoP, j) =>{
+			var array = this.state.challenges; // make a separate copy of the array
+	  		var index = array.indexOf(retoP)
+	  		array.splice(retoP, 1);
+	  		this.setState({challenges: array});
+	  	})
+	}
+
 	render() {
-		const retos = this.state.challenges.map((reto, i) =>{
+		const retosTodos = this.state.challenges.map((reto, i) =>{
 			return (
 				<div key={reto._id} style={{width: "80%"}} >
 					<PanelGroup accordion id="accordion-example">	
@@ -60,11 +78,12 @@ class Challenge extends Component{
 				</div>
 			)
 		});
+
 		return(
 
 	        <div className= "container">
 	        	<div className="row">			    		
-		            	{retos}
+		            	{retosTodos}
 		    	</div>	
 	        </div>	
 		)

@@ -24,13 +24,15 @@ class App extends Component{
 		this.userExist = this.userExist.bind(this);
 
 		this.state = {
+				_id: "",
 				show: false,
 				isLoggedIn: false,
 				provider: "",
 				userID: "",
 				name: "",
 				email: "",
-				picture: ""
+				picture: "",
+				retosParticipacion: []
 		};
   	}
 
@@ -52,17 +54,23 @@ class App extends Component{
 		})	.then(res => res.json())
 			.then(data => 
 				{   if(data && !register){
+						console.log("aQQ");
+						console.log(data.retosParticipacion);
 						this.setState({
+								_id: data._id,
 								isLoggedIn: true,
 								provider: data.provider,
 								userID: data.uid,
 								name: data.name,
 								email: data.email,
-								picture: user.photoURL
+								picture: user.photoURL,
+								retosParticipacion: data.retosParticipacion
 						}); 
+
 					return true;
 				}
 				if(register && !data){
+						console.log("LLLLL");
 						const user_data = ({
 								provider: user.providerId,
 								userID: user.uid,
@@ -187,14 +195,14 @@ class App extends Component{
 							<p className="element-title">Consejo del Día</p>
 							<a><img className="element-icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
 							<img className="element-img" src={this.state.picture} alt="Info"/>
-							<p>Este es {this.state.name}, cuyo correo es {this.state.email}</p>
+							<p>Este es {this.state._id}, cuyo correo es {this.state.email}</p>
 						</div>
 						<div className="element-wrapper">
 							<a><img className="element-icon" src="https://cdn1.iconfinder.com/data/icons/material-audio-video/22/loop-512.png" alt="Report"/></a>
 							<p className="element-title">Recomendaciones</p>
 							<a><img className="element-icon" src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/info-512.png" alt="Info"/></a>
 							<img className="element-img" src={this.state.picture} alt="Info"/>
-							<p>Este es {this.state.name}, cuyo correo es {this.state.email}</p>
+							<p>Este es {this.state.userID}, cuyo correo es {this.state.email}</p>
 						</div>
 						<div className= "title-separator">
 							<a href="#navver"><img src="https://cdn2.iconfinder.com/data/icons/pittogrammi/142/65-512.png" alt="Hashtag"/></a>

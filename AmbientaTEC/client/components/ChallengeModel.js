@@ -15,7 +15,7 @@ class ChallengeModel extends Component{
 			show: false
 		};
 		this.handleShow = this.handleShow.bind(this);
-		this.participar = this.participar.bind(this);
+		this.participarReto = this.participarReto.bind(this);
 		
 	}
 
@@ -40,16 +40,11 @@ class ChallengeModel extends Component{
 		}, this.state.time);
 	}
 
-	participar(event, idCampana, idUser){
-		console.log('Checkbox checked:', (event.target.checked));
-		console.log('Campana:', idCampana);
-		if (event.target.checked){
-			console.log('Entra IF');
-			fetch('api/participantes', {
-				method: 'POST',
+	participarReto(){
+			fetch(`/api/cuentas/${this.state.userId}`, {
+				method: 'PUT',
 						body: JSON.stringify({
-							organizador: idUser,
-							idCamp: idCampana
+							idReto: this.state._id
 						}),
 		        headers: {
 		          'Accept': 'application/json',
@@ -58,30 +53,10 @@ class ChallengeModel extends Component{
 			})
 			.then(res => res.json())
 			.then (data => {
-			M.toast({html: 'Se espera su participacion.'});
+				console.log(data.id)
 			})
 			.catch(err => console.error(err));
-		}else{
-			console.log('ELSE');
-		    if(confirm('Quieres cancelar la asistencia?')) {
-		      fetch(`/api/participantes/${idUser}`, {
-		        method: 'DELETE',
-		        headers: {
-		          'Accept': 'application/json',
-		          'Content-Type': 'application/json'
-		        }
-		      })
-		        .then(res => res.json())
-		        .then(data => {
-		          console.log(data);
-		          M.toast({html: 'Asistencia cancelada'});
-		          this.fetchTasks();
-		        });
-		    }
-		}
-		
-		//.catch(err => console.error(err));
-		//e.preventDefault();
+
 	}
 
 	render() {
@@ -91,30 +66,12 @@ class ChallengeModel extends Component{
 		      	<form>
 		      		<p>      
 		      			<label>
-		      			    <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
+		      			    <Button bsStyle="primary" bsSize="large" onClick={this.participarReto}>
 								Participar
 							</Button>
 			            </label>
 		      		</p>
 		      	</form>
-
-				<div className= "container">
-					<Modal show={this.state.show} >
-						<Modal.Header >
-							<Modal.Title>{this.state.challengeName}</Modal.Title>
-						</Modal.Header>
-						<Modal.Body>
-							<ProgressBar active now={45} />
-							{this.state.userId}
-							<h4>Wrapped Text</h4>
-
-							<p>PURAAAA HABLAAADAAAAAA</p>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button onClick={this.handleClose}>Listo</Button>
-						</Modal.Footer>
-					</Modal>
-				</div>
 			</div>
 		)
 	}

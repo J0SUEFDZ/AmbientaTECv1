@@ -14,13 +14,32 @@ router.post('/', async (req, res) => {
         userID: req.body.userID,
         name: req.body.name,
         email: req.body.email,
+        retosParticipacion: req.body.retosParticipacion,
+        retosGanados: req.body.retosGanados,
+        retosPerdidos:req.body.retosPerdidos
     });
-    console.log("Nuevo usuario: "+newCuenta);
+    console.log("Nuevo usuario: "+ newCuenta);
 
     await newCuenta.save().then(cuenta => res.json(cuenta));
 });
 
+/* UPDATE Account  retosParticipacion.append*/
+router.put('/:id', function(req, res, next) {
+    Cuenta.findByIdAndUpdate(req.params.id,
+    {$push: {retosParticipacion: req.body.idReto}},
+    {safe: true, upsert: true},
+    function(err, doc) {
+        if(err){
+        console.log(err);
+        }else{
+            res.json(req.params.id);
+        }
+    }
+);
+});
+
 router.get('/:id', async (req, res) => {
+    console.log(req.params.id);
     await Cuenta.find(function(err, data) {
         if (err) return console.error(err);
         const resultado = data.find(function(element){
@@ -36,6 +55,8 @@ router.get('/:id', async (req, res) => {
         }
       });
   });
+
+
   
 
 
