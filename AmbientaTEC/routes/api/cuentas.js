@@ -26,18 +26,26 @@ router.post('/', async (req, res) => {
 /* UPDATE Account  retosParticipacion.append*/
 router.put('/:id', function(req, res, next) {
     Cuenta.findByIdAndUpdate(req.params.id,
-    {$push: {retosParticipacion: req.body.idReto}},
-    {safe: true, upsert: true},
-    function(err, doc) {
-        if(err){
-        console.log(err);
-        }else{
-            res.json(req.params.id);
-        }
-    }
-);
+    {$push: {retosParticipacion: req.body.reto}},
+    {safe: true, upsert: true})
+    .then(cuenta => res.json(cuenta))
+    .catch(err => res.status(404).json({ success: false }));
+});
+router.put('/ganar/:id', function(req, res, next) {
+    Cuenta.findByIdAndUpdate(req.params.id,
+    {$push: {retosGanados: req.body.reto}},
+    {safe: true, upsert: true})
+    .then(cuenta => res.json(cuenta))
+    .catch(err => res.status(404).json({ success: false }));
 });
 
+router.put('/participaPop/:id', function(req, res, next) {
+    Cuenta.findByIdAndUpdate(req.params.id,
+    {$pull: {retosParticipacion: req.body.reto}},
+    {safe: true, upsert: true})
+    .then(cuenta => res.json(cuenta))
+    .catch(err => res.status(404).json({ success: false }));
+});
 router.get('/:id', async (req, res) => {
     console.log(req.params.id);
     await Cuenta.find(function(err, data) {
@@ -56,7 +64,11 @@ router.get('/:id', async (req, res) => {
       });
   });
 
-
+router.get('/unica/:id', async (req, res) => {
+  await Cuenta.findById(req.params.id)
+    .then(cuenta => res.json(cuenta))
+    .catch(err => res.status(404).json({ success: false }));
+});
   
 
 
