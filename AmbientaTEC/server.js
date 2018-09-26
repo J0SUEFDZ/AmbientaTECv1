@@ -8,6 +8,7 @@ const campanas = require('./routes/api/campanas');
 const participantes = require('./routes/api/participantes');
 const cuentas = require('./routes/api/cuentas');
 const solicitudes = require('./routes/api/solicitudes');
+const hasthagMoreLess = require('./routes/api/hashtagMoreLess');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/campanas', campanas);
 app.use('/api/participantes', participantes);
 app.use('/api/cuentas', cuentas);
 app.use('/api/solicitudes', solicitudes);
+app.use('/api/hashtagMoreLess', hasthagMoreLess);
 
 //Static files
 

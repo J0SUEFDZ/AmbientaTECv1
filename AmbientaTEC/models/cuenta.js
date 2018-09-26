@@ -18,7 +18,8 @@ const CuentaSchema = new Schema({
   email: {
     type: String,
     required: true
-  }
+  },
+  campanias:[String]
 });
 
 module.exports = Cuenta = mongoose.model('cuenta', CuentaSchema);
