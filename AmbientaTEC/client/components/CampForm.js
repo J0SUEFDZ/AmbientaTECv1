@@ -25,8 +25,6 @@ class CampForm extends Component {
 	agregarCampana(e){
 		const Hashtag22="#AmbientaTEC_more_"+this.state.Hashtag1+"_less_"+this.state.Hashtag2;
 		this.setState({
-			Hashtag1: null,
-			Hashtag2: null,
 			hashtag: Hashtag22
 		})
 
@@ -122,14 +120,14 @@ class CampForm extends Component {
             	onChange = {this.handleChange}/>
 			<ControlLabel>Hashtag</ControlLabel>
 				<br/>
-				<FormControl.Static className="label1">#More</FormControl.Static>
-				<FormControl className="selects" componentClass="select" placeholder="green" name="Hashtag1" onChange={this.handleChange}>
+			<FormControl.Static className="label1">#More</FormControl.Static>
+			<FormControl className="selects" componentClass="select" placeholder="green" name="Hashtag1" onChange={this.handleChange}>
 					<option value="fun">fun</option>
 					<option value="life">life</option>
 					<option value="time">time</option>
-				</FormControl>
-				<FormControl.Static className="label2">Less</FormControl.Static>
-				<FormControl className="selects" componentClass="select" placeholder="trash" name="Hashtag2"onChange={this.handleChange}>
+			</FormControl>
+			<FormControl.Static className="label2">Less</FormControl.Static>
+			<FormControl className="selects" componentClass="select" placeholder="trash" name="Hashtag2"onChange={this.handleChange}>
 					<option value="trash">trash</option>
 					<option value="plastic">plastic</option>
 					<option value="paper">paper</option>
