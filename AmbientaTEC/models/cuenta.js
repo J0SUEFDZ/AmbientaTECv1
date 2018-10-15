@@ -19,6 +19,18 @@ const CuentaSchema = new Schema({
     type: String,
     required: true
   },
+  campParticipacion:[{
+    _id:  Schema.ObjectId,
+    nombre:String,
+    direccion:String,
+    organizador:String,
+    fecha:Date,
+    telefono: Number,
+    email: Date,
+    descripcion: String,
+    habilitada: Boolean,
+    hashtag: String
+  }],
   retosParticipacion:[{
     _id:  Schema.ObjectId,
     challengeName:String,
@@ -26,7 +38,7 @@ const CuentaSchema = new Schema({
     endDate: Date,
     time: Number,
     description: String
-  }],
+  }],  
   retosGanados:[{
     _id:  Schema.ObjectId,
     challengeName:String,

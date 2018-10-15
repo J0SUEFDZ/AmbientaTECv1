@@ -25,6 +25,8 @@ class CampForm extends Component {
 	agregarCampana(e){
 		const Hashtag22="#AmbientaTEC_more_"+this.state.Hashtag1+"_less_"+this.state.Hashtag2;
 		this.setState({
+			Hashtag1: null,
+			Hashtag2: null,
 			hashtag: Hashtag22
 		})
 

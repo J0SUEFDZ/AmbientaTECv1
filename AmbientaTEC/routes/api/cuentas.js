@@ -38,6 +38,15 @@ router.put('/ganar/:id', function(req, res, next) {
     .then(cuenta => res.json(cuenta))
     .catch(err => res.status(404).json({ success: false }));
 });
+//Para insertar una camp al participar
+router.put('/participaPush/:id', function(req, res, next) {
+    Cuenta.findByIdAndUpdate(req.params.id,
+    {$push: {campParticipacion: req.body.reto}},
+    {safe: true, upsert: true})
+    .then(cuenta => res.json(cuenta))
+    .catch(err => res.status(404).json({ success: false }));
+});
+
 
 router.put('/participaPop/:id', function(req, res, next) {
     Cuenta.findByIdAndUpdate(req.params.id,

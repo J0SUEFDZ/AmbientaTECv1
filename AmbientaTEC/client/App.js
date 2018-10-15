@@ -67,7 +67,6 @@ class App extends Component{
 	      .then(res => res.json())
 	      .then(data => {
 	        this.setState({tips: data});
-	        
 	      });
 	}
 	
@@ -76,9 +75,9 @@ class App extends Component{
 	      .then(res => res.json())
 	      .then(data => {
 	        this.setState({recomendaciones: data});
-	        
 	      });
 	}
+	
 	userExist(user, register){
 		fetch(`/api/cuentas/${user.uid}`, {
 				method: 'GET',

@@ -91,7 +91,7 @@ class Campaign extends Component{
 					      	<p>Fecha: {campana.fecha}</p>
 					      	<p>Telefono: {campana.telefono}</p>
 					      	<p>Email: {campana.email}</p>
-									<p>Hashtag: {campana.hashtag}</p>
+							<p>Hashtag: {campana.hashtag}</p>
 					      	<form>
 					      		<p>      
 					      			<label>

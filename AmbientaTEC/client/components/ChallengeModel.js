@@ -6,6 +6,7 @@ class ChallengeModel extends Component{
 		super();
 		this.state = {
 			reto: '',
+			retos: '',
 			userId: '',
 			show: false
 		};
@@ -16,8 +17,10 @@ class ChallengeModel extends Component{
 	componentDidMount() {
 		const newReto=this.props.newReto;
 		const user = this.props.user;
+		const allRetos = this.props.allRetos;
 		this.setState({
 			reto: newReto,
+			retos: allRetos,
 			userId: user
 		})
 	}
@@ -66,8 +69,8 @@ class ChallengeModel extends Component{
 			console.log(data)
 		})
 		.catch(err => console.error(err));
+		this.removeChallenge(this.state.reto);
 		this.setState({show: true});
-		//this.removeChallenge(this.state.reto);
 	}
 
 	removeChallenge(reto) {

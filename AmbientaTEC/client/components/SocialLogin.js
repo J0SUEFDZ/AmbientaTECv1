@@ -97,6 +97,7 @@ export default class SocialLogin extends Component {
             });
         });
     }
+    
     insert(result){
         const user = result.user;
         const data = user.providerData.find(function(element){
